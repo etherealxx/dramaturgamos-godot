@@ -14,7 +14,7 @@ func _on_plus_button_pressed():
 	textbox.show()
 	
 func check_available_name():
-	var name_array : Array[String]
+	var name_array : Array[String] = []
 	for iternumber : int in self.get_child_count():
 		var child = self.get_child(iternumber)
 		if "ischaracterline" in child:
@@ -26,6 +26,19 @@ func update_all_name_list(namelist : Array[String] = check_available_name()):
 		var child = parent.get_child(iternumber)
 		if "islinecontainer" in parent.get_child(iternumber):
 			child.update_character(namelist)
+
+func add_names_from_list(list):
+	for new_name in list:
+		if new_name not in check_available_name():
+			var last_chara
+			for iternumber : int in self.get_child_count():
+				if "ischaracterline" in self.get_child(iternumber):
+					last_chara = self.get_child(iternumber)
+					
+			var new_chara_inst = load("res://scenes/character_line.tscn").instantiate()
+			last_chara.add_sibling(new_chara_inst)
+			new_chara_inst.set_text(new_name)
+			update_all_name_list()
 
 func _on_ok_button_pressed():
 	var new_chara_name = textbox.get_text()

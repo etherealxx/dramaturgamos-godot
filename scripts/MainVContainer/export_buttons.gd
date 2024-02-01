@@ -31,7 +31,7 @@ func _on_file_chosen(path):
 	if waitfor == "jsonexport":
 		var title = parent.get_node("TitleLine").get_title()
 	
-		var dialogue_array : Array[Dictionary]
+		var dialogue_array : Array[Dictionary] = []
 		var linecont_amount := 0
 		for iternumber : int in parent.get_child_count():
 			var child = parent.get_child(iternumber)
@@ -63,7 +63,7 @@ func _on_file_chosen(path):
 	elif waitfor == "txtexport":
 		var title = parent.get_node("TitleLine").get_title()
 		
-		var dialogue_text : String
+		var dialogue_text : String = ""
 		for iternumber : int in parent.get_child_count():
 			var child = parent.get_child(iternumber)
 			if "islinecontainer" in child:

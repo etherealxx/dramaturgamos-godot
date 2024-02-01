@@ -38,15 +38,17 @@ func set_dialog(text):
 	dialogtext.set_text(text)
 
 func update_character(namelist : Array[String] = character_names):
-	var option_itemlist : Array[String]
-	var addedname_list : Array[String]
+	var option_itemlist : Array[String] = []
+	var addedname_list : Array[String] = []
 	for i in charaoption.get_item_count():
-		option_itemlist.append(charaoption.get_item_text(i))
-	for name in namelist:
-		if name not in option_itemlist:
-			addedname_list.append(name)
-	for name in addedname_list:
-		charaoption.add_item(name)
+		var chara_name = charaoption.get_item_text(i)
+		if not option_itemlist.has(chara_name):
+			option_itemlist.append(chara_name)
+	for new_name in namelist:
+		if new_name not in option_itemlist:
+			addedname_list.append(new_name)
+	for new_name in addedname_list:
+		charaoption.add_item(new_name)
 	character_names = namelist
 	
 func check_index():
@@ -82,12 +84,10 @@ func get_character():
 
 func set_character_by_name(chara_name : String):
 	var select_index = 0
-	for i in charaoption.get_item_count():
-		if charaoption.get_item_text(i) == chara_name:
-			for chara_index in charaoption.get_item_count():
-				if charaoption.get_item_text(chara_index) == chara_name:
-					charaoption.selected = chara_index
-					break
+	for chara_index in charaoption.get_item_count():
+		if charaoption.get_item_text(chara_index) == chara_name:
+			charaoption.selected = chara_index
+			break
 	charaoption.add_item(chara_name)
 	update_character()
 	#charaoption.set_item_text(chara)
@@ -98,7 +98,7 @@ func get_dialog():
 func update_all_name_list(namelist = character_names):
 	for iternumber : int in parent.get_child_count():
 		var child = parent.get_child(iternumber)
-		if "islinecontainer" in parent.get_child(iternumber):
+		if "islinecontainer" in child:
 			update_character(namelist)
 
 func check_first_two():
