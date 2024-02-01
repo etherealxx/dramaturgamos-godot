@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7xselvyevq7v"]
+
+[ext_resource type="Theme" uid="uid://h1w2iewujk03" path="res://themes/emoji_button_theme.tres" id="1_dswh0"]
+[ext_resource type="Script" path="res://scripts/MainVContainer/character_line.gd" id="2_8po7r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fn2n7"]
+bg_color = Color(0.180392, 0.180392, 0.180392, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.121569, 0.121569, 0.121569, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="CharacterLine" type="Label"]
+size_flags_vertical = 1
+theme = ExtResource("1_dswh0")
+theme_override_styles/normal = SubResource("StyleBoxFlat_fn2n7")
+text = "Arya"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_8po7r")

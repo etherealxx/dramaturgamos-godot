@@ -1,0 +1,274 @@
+[gd_scene load_steps=13 format=3 uid="uid://6p3jeaiqaa6u"]
+
+[ext_resource type="PackedScene" uid="uid://dj2rbr7ktv3ej" path="res://scenes/line_container.tscn" id="1_6uodd"]
+[ext_resource type="Theme" uid="uid://h1w2iewujk03" path="res://themes/emoji_button_theme.tres" id="1_53uel"]
+[ext_resource type="Script" path="res://scripts/LineContainer/main.gd" id="1_ft4hh"]
+[ext_resource type="Script" path="res://scripts/MainVContainer.gd" id="2_qm2ib"]
+[ext_resource type="Script" path="res://scripts/LineContainer/export_buttons.gd" id="3_v5iiy"]
+[ext_resource type="Script" path="res://scripts/MainVContainer/TitleLine.gd" id="3_x2al1"]
+[ext_resource type="Script" path="res://scripts/MainVContainer/CharacterList.gd" id="4_p3y4n"]
+[ext_resource type="Script" path="res://scripts/LineContainer/export_buttons2.gd" id="5_32sbc"]
+[ext_resource type="PackedScene" uid="uid://b7xselvyevq7v" path="res://scenes/character_line.tscn" id="5_ubqmt"]
+
+[sub_resource type="Theme" id="Theme_ourpl"]
+default_font_size = 30
+
+[sub_resource type="Theme" id="Theme_xf41s"]
+default_font_size = 25
+
+[sub_resource type="Theme" id="Theme_q7hsn"]
+default_font_size = 20
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ft4hh")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainVContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("2_qm2ib")
+
+[node name="EmptyLine" type="Control" parent="ScrollContainer/MainVContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="ImportButtons" type="HBoxContainer" parent="ScrollContainer/MainVContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="ExportVarbtn" type="Button" parent="ScrollContainer/MainVContainer/ImportButtons"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("1_53uel")
+text = "Export to Godot Variant Txt"
+
+[node name="ExportTextbtn" type="Button" parent="ScrollContainer/MainVContainer/ImportButtons"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("1_53uel")
+text = "Export to Formatted Txt"
+
+[node name="ExportJsonbtn" type="Button" parent="ScrollContainer/MainVContainer/ImportButtons"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("1_53uel")
+text = "Export to Formatted JSON"
+
+[node name="Separator" type="HSeparator" parent="ScrollContainer/MainVContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="TitleLine" type="HBoxContainer" parent="ScrollContainer/MainVContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+script = ExtResource("3_x2al1")
+
+[node name="EmptySpace" type="Control" parent="ScrollContainer/MainVContainer/TitleLine"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="ScrollContainer/MainVContainer/TitleLine"]
+custom_minimum_size = Vector2(188, 0)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="ScrollContainer/MainVContainer/TitleLine/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -11.5
+offset_right = 17.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ourpl")
+text = "Title"
+
+[node name="TitleText" type="TextEdit" parent="ScrollContainer/MainVContainer/TitleLine"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_xf41s")
+placeholder_text = "get dat title"
+
+[node name="EmptySpace2" type="Control" parent="ScrollContainer/MainVContainer/TitleLine"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="CharacterList" type="HBoxContainer" parent="ScrollContainer/MainVContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+script = ExtResource("4_p3y4n")
+
+[node name="EmptySpace" type="Control" parent="ScrollContainer/MainVContainer/CharacterList"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="CharacterTitle" type="Panel" parent="ScrollContainer/MainVContainer/CharacterList"]
+custom_minimum_size = Vector2(188, 0)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="ScrollContainer/MainVContainer/CharacterList/CharacterTitle"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -11.5
+offset_right = 17.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ourpl")
+theme_override_font_sizes/font_size = 25
+text = "Character List"
+
+[node name="CharacterLine" parent="ScrollContainer/MainVContainer/CharacterList" instance=ExtResource("5_ubqmt")]
+layout_mode = 2
+
+[node name="NewCharacterText" type="TextEdit" parent="ScrollContainer/MainVContainer/CharacterList"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_xf41s")
+placeholder_text = "write new character here"
+
+[node name="OKButton" type="Button" parent="ScrollContainer/MainVContainer/CharacterList"]
+visible = false
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("1_53uel")
+text = "✅"
+
+[node name="XButton" type="Button" parent="ScrollContainer/MainVContainer/CharacterList"]
+visible = false
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("1_53uel")
+text = "❌"
+
+[node name="PlusButton" type="Button" parent="ScrollContainer/MainVContainer/CharacterList"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("1_53uel")
+text = "➕"
+
+[node name="EmptySpace2" type="Control" parent="ScrollContainer/MainVContainer/CharacterList"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="LineContainer" parent="ScrollContainer/MainVContainer" instance=ExtResource("1_6uodd")]
+layout_mode = 2
+
+[node name="Separator2" type="HSeparator" parent="ScrollContainer/MainVContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="ExportButtons_old" type="HBoxContainer" parent="ScrollContainer/MainVContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+script = ExtResource("3_v5iiy")
+
+[node name="ExportVarbtn" type="Button" parent="ScrollContainer/MainVContainer/ExportButtons_old"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("1_53uel")
+text = "Export to Godot Variant Txt"
+
+[node name="ExportTextbtn" type="Button" parent="ScrollContainer/MainVContainer/ExportButtons_old"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("1_53uel")
+text = "Export to Formatted Txt"
+
+[node name="ExportJsonbtn" type="Button" parent="ScrollContainer/MainVContainer/ExportButtons_old"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("1_53uel")
+text = "Export to Formatted JSON"
+
+[node name="ExportButtons" type="HBoxContainer" parent="ScrollContainer/MainVContainer"]
+layout_mode = 2
+alignment = 1
+script = ExtResource("5_32sbc")
+
+[node name="ExportTextbtn" type="Button" parent="ScrollContainer/MainVContainer/ExportButtons"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("1_53uel")
+text = "Export to Formatted Txt"
+
+[node name="ExportJsonbtn" type="Button" parent="ScrollContainer/MainVContainer/ExportButtons"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("1_53uel")
+text = "Export to Formatted JSON"
+
+[node name="ExportButtons2" type="HBoxContainer" parent="ScrollContainer/MainVContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+script = ExtResource("5_32sbc")
+
+[node name="Test" type="Button" parent="ScrollContainer/MainVContainer/ExportButtons2"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("1_53uel")
+text = "Test"
+
+[node name="InfoText" type="Label" parent="ScrollContainer/MainVContainer"]
+layout_mode = 2
+theme = SubResource("Theme_q7hsn")
+text = "(Info text will be rendered here)"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="ScrollContainer/MainVContainer"]
+visible = false
+layout_mode = 2
+text = "aaaa"
+
+[node name="FileDialog" type="FileDialog" parent="."]
+initial_position = 2
+size = Vector2i(921, 518)
+ok_button_text = "Save"
+access = 2
+
+[node name="AlertPopup" type="AcceptDialog" parent="."]
+title = "Warning"
+initial_position = 2
+size = Vector2i(157, 100)
+unresizable = true
+dialog_text = "Put your title first!"
+
+[connection signal="pressed" from="ScrollContainer/MainVContainer/ImportButtons/ExportVarbtn" to="ScrollContainer/MainVContainer/ImportButtons" method="_on_export_varbtn_pressed"]
+[connection signal="pressed" from="ScrollContainer/MainVContainer/ImportButtons/ExportTextbtn" to="ScrollContainer/MainVContainer/ImportButtons" method="_on_export_textbtn_pressed"]
+[connection signal="pressed" from="ScrollContainer/MainVContainer/ImportButtons/ExportJsonbtn" to="ScrollContainer/MainVContainer/ImportButtons" method="_on_export_jsonbtn_pressed"]
+[connection signal="pressed" from="ScrollContainer/MainVContainer/CharacterList/OKButton" to="ScrollContainer/MainVContainer/CharacterList" method="_on_ok_button_pressed"]
+[connection signal="pressed" from="ScrollContainer/MainVContainer/CharacterList/XButton" to="ScrollContainer/MainVContainer/CharacterList" method="_on_x_button_pressed"]
+[connection signal="pressed" from="ScrollContainer/MainVContainer/CharacterList/PlusButton" to="ScrollContainer/MainVContainer/CharacterList" method="_on_plus_button_pressed"]
+[connection signal="pressed" from="ScrollContainer/MainVContainer/ExportButtons_old/ExportVarbtn" to="ScrollContainer/MainVContainer/ExportButtons_old" method="_on_export_varbtn_pressed"]
+[connection signal="pressed" from="ScrollContainer/MainVContainer/ExportButtons_old/ExportTextbtn" to="ScrollContainer/MainVContainer/ExportButtons_old" method="_on_export_textbtn_pressed"]
+[connection signal="pressed" from="ScrollContainer/MainVContainer/ExportButtons_old/ExportJsonbtn" to="ScrollContainer/MainVContainer/ExportButtons_old" method="_on_export_jsonbtn_pressed"]
+[connection signal="pressed" from="ScrollContainer/MainVContainer/ExportButtons/ExportTextbtn" to="ScrollContainer/MainVContainer/ExportButtons" method="_on_export_textbtn_pressed"]
+[connection signal="pressed" from="ScrollContainer/MainVContainer/ExportButtons/ExportJsonbtn" to="ScrollContainer/MainVContainer/ExportButtons" method="_on_export_jsonbtn_pressed"]
+[connection signal="pressed" from="ScrollContainer/MainVContainer/ExportButtons2/Test" to="ScrollContainer/MainVContainer/ExportButtons2" method="_on_test_pressed"]
+[connection signal="pressed" from="ScrollContainer/MainVContainer/Button" to="." method="_on_button_pressed"]

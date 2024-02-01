@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://dj2rbr7ktv3ej"]
+
+[ext_resource type="Script" path="res://scripts/LineContainer/line_container.gd" id="1_7n7xs"]
+[ext_resource type="Theme" uid="uid://h1w2iewujk03" path="res://themes/emoji_button_theme.tres" id="1_mepmq"]
+
+[sub_resource type="Theme" id="Theme_xf41s"]
+default_font_size = 25
+
+[node name="LineContainer" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+script = ExtResource("1_7n7xs")
+
+[node name="EmptySpace" type="Control" parent="."]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="PlusButton" type="Button" parent="."]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("1_mepmq")
+text = "➕"
+
+[node name="UpButton" type="Button" parent="."]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("1_mepmq")
+text = "☝️"
+
+[node name="DownButton" type="Button" parent="."]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("1_mepmq")
+text = "👇"
+
+[node name="CharacterSelect" type="OptionButton" parent="."]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="DialogTextbox" type="TextEdit" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_xf41s")
+placeholder_text = "fill the hole"
+
+[node name="XButton" type="Button" parent="."]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("1_mepmq")
+text = "❌"
+
+[node name="EmptySpace2" type="Control" parent="."]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
