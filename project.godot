@@ -10,8 +10,9 @@ config_version=5
 
 [application]
 
-config/name="Dramaturgamos-4.x"
-config/description="Enter an interesting project description here!"
+config/name="Dramaturgamos"
+config/description="tool"
+config/version="0.0.1"
 run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.2")
 config/icon="res://icon.png"

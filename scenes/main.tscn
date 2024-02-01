@@ -111,20 +111,25 @@ placeholder_text = "get dat title"
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 
-[node name="CharacterList" type="HBoxContainer" parent="ScrollContainer/MainVContainer"]
+[node name="CharacterScroll" type="ScrollContainer" parent="ScrollContainer/MainVContainer"]
+layout_mode = 2
+vertical_scroll_mode = 0
+
+[node name="CharacterList" type="HBoxContainer" parent="ScrollContainer/MainVContainer/CharacterScroll"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+size_flags_horizontal = 3
 script = ExtResource("4_p3y4n")
 
-[node name="EmptySpace" type="Control" parent="ScrollContainer/MainVContainer/CharacterList"]
+[node name="EmptySpace" type="Control" parent="ScrollContainer/MainVContainer/CharacterScroll/CharacterList"]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 
-[node name="CharacterTitle" type="Panel" parent="ScrollContainer/MainVContainer/CharacterList"]
+[node name="CharacterTitle" type="Panel" parent="ScrollContainer/MainVContainer/CharacterScroll/CharacterList"]
 custom_minimum_size = Vector2(188, 0)
 layout_mode = 2
 
-[node name="Title" type="Label" parent="ScrollContainer/MainVContainer/CharacterList/CharacterTitle"]
+[node name="Title" type="Label" parent="ScrollContainer/MainVContainer/CharacterScroll/CharacterList/CharacterTitle"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -141,37 +146,38 @@ theme = SubResource("Theme_ourpl")
 theme_override_font_sizes/font_size = 25
 text = "Character List"
 
-[node name="CharacterLine" parent="ScrollContainer/MainVContainer/CharacterList" instance=ExtResource("5_ubqmt")]
+[node name="CharacterLine" parent="ScrollContainer/MainVContainer/CharacterScroll/CharacterList" instance=ExtResource("5_ubqmt")]
 layout_mode = 2
 
-[node name="NewCharacterText" type="TextEdit" parent="ScrollContainer/MainVContainer/CharacterList"]
+[node name="NewCharacterText" type="TextEdit" parent="ScrollContainer/MainVContainer/CharacterScroll/CharacterList"]
 visible = false
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_xf41s")
 placeholder_text = "write new character here"
 
-[node name="OKButton" type="Button" parent="ScrollContainer/MainVContainer/CharacterList"]
+[node name="OKButton" type="Button" parent="ScrollContainer/MainVContainer/CharacterScroll/CharacterList"]
 visible = false
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme = ExtResource("1_53uel")
 text = "✅"
 
-[node name="XButton" type="Button" parent="ScrollContainer/MainVContainer/CharacterList"]
+[node name="XButton" type="Button" parent="ScrollContainer/MainVContainer/CharacterScroll/CharacterList"]
 visible = false
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme = ExtResource("1_53uel")
 text = "❌"
 
-[node name="PlusButton" type="Button" parent="ScrollContainer/MainVContainer/CharacterList"]
+[node name="PlusButton" type="Button" parent="ScrollContainer/MainVContainer/CharacterScroll/CharacterList"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme = ExtResource("1_53uel")
 text = "➕"
 
-[node name="EmptySpace2" type="Control" parent="ScrollContainer/MainVContainer/CharacterList"]
+[node name="EmptySpace2" type="Control" parent="ScrollContainer/MainVContainer/CharacterScroll/CharacterList"]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 
@@ -262,9 +268,9 @@ dialog_text = "Put your title first!"
 [connection signal="pressed" from="ScrollContainer/MainVContainer/ImportButtons/ExportVarbtn" to="ScrollContainer/MainVContainer/ImportButtons" method="_on_export_varbtn_pressed"]
 [connection signal="pressed" from="ScrollContainer/MainVContainer/ImportButtons/ExportTextbtn" to="ScrollContainer/MainVContainer/ImportButtons" method="_on_export_textbtn_pressed"]
 [connection signal="pressed" from="ScrollContainer/MainVContainer/ImportButtons/ExportJsonbtn" to="ScrollContainer/MainVContainer/ImportButtons" method="_on_export_jsonbtn_pressed"]
-[connection signal="pressed" from="ScrollContainer/MainVContainer/CharacterList/OKButton" to="ScrollContainer/MainVContainer/CharacterList" method="_on_ok_button_pressed"]
-[connection signal="pressed" from="ScrollContainer/MainVContainer/CharacterList/XButton" to="ScrollContainer/MainVContainer/CharacterList" method="_on_x_button_pressed"]
-[connection signal="pressed" from="ScrollContainer/MainVContainer/CharacterList/PlusButton" to="ScrollContainer/MainVContainer/CharacterList" method="_on_plus_button_pressed"]
+[connection signal="pressed" from="ScrollContainer/MainVContainer/CharacterScroll/CharacterList/OKButton" to="ScrollContainer/MainVContainer/CharacterScroll/CharacterList" method="_on_ok_button_pressed"]
+[connection signal="pressed" from="ScrollContainer/MainVContainer/CharacterScroll/CharacterList/XButton" to="ScrollContainer/MainVContainer/CharacterScroll/CharacterList" method="_on_x_button_pressed"]
+[connection signal="pressed" from="ScrollContainer/MainVContainer/CharacterScroll/CharacterList/PlusButton" to="ScrollContainer/MainVContainer/CharacterScroll/CharacterList" method="_on_plus_button_pressed"]
 [connection signal="pressed" from="ScrollContainer/MainVContainer/ExportButtons_old/ExportVarbtn" to="ScrollContainer/MainVContainer/ExportButtons_old" method="_on_export_varbtn_pressed"]
 [connection signal="pressed" from="ScrollContainer/MainVContainer/ExportButtons_old/ExportTextbtn" to="ScrollContainer/MainVContainer/ExportButtons_old" method="_on_export_textbtn_pressed"]
 [connection signal="pressed" from="ScrollContainer/MainVContainer/ExportButtons_old/ExportJsonbtn" to="ScrollContainer/MainVContainer/ExportButtons_old" method="_on_export_jsonbtn_pressed"]

@@ -1,6 +1,6 @@
 extends HBoxContainer
 
-@onready var parent = get_parent()
+@onready var parent = get_parent().get_parent()
 @onready var plus = $PlusButton
 @onready var xbtn = $XButton
 @onready var ok = $OKButton
