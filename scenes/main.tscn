@@ -54,7 +54,6 @@ script = ExtResource("3_paokd")
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme = ExtResource("1_53uel")
-disabled = true
 text = "Import Formatted Txt"
 
 [node name="ImportJsonbtn" type="Button" parent="ScrollContainer/MainVContainer/ImportButtons"]
@@ -239,6 +238,7 @@ initial_position = 2
 size = Vector2i(921, 518)
 ok_button_text = "Save"
 access = 2
+show_hidden_files = true
 
 [node name="AlertPopup" type="AcceptDialog" parent="."]
 title = "Warning"

@@ -72,28 +72,47 @@ func _on_file_chosen(path):
 			printx("Error opening the file for reading")
 		
 		waitfor = String()
-	elif waitfor == "txtexport":
-		var title = parent.get_node("TitleLine").get_title()
 		
-		var dialogue_text : String = ""
-		for iternumber : int in parent.get_child_count():
-			var child = parent.get_child(iternumber)
-			if "islinecontainer" in child:
-				if child.get_dialog() != "":
-					var sentence_text : String = child.get_character() + " : " + child.get_dialog()
-					dialogue_text += sentence_text + "\n"
-		
+	elif waitfor == "txtimport":
 		var file_path : String = path
-		var file: FileAccess = FileAccess.open(file_path, FileAccess.WRITE)
-
+		var file: FileAccess = FileAccess.open(file_path, FileAccess.READ)
+		
+		var title = file_path.get_file().get_slice("." + file_path.get_extension(), 0)
+		parent.get_node("TitleLine").set_title(title)
+		
 		if file != null:
-			file.store_string(dialogue_text)
+			var txt_string : String = file.get_as_text()
+			var string_lines = txt_string.split("\n", false)
 
+			var new_names : Array[String] = []
+			for line in string_lines:
+				var chara_name = line.get_slice(" : ", 0)
+				if not new_names.has(chara_name):
+					new_names.append(chara_name)
+					
+			if !new_names.is_empty():
+				parent.update_charalist(new_names)
+				parent.charalistline_updateall()
+			
+			var last_linecont : HBoxContainer
+			for line in string_lines:
+				var chara_name = line.get_slice(" : ", 0)
+				var chara_dialog = line.get_slice(" : ", 1)
+				last_linecont = parent.append_line_container(chara_name, 
+															chara_dialog)
+			last_linecont.update_all_name_list(parent.get_charalist())
+			
+			
+			#for value in json_dict.values():
+				#print(value)
+			
+			#print(json_var)
 			file.close()
 
-			printx("Formatted text exported successfully\nLocated in %s" % path)
+			printx("Formatted Txt imported successfully.")
 		else:
-			printx("Error opening the file for writing")
+			printx("Error opening the file for reading")
+		
 		waitfor = String()
 
 func _on_import_textbtn_pressed():
