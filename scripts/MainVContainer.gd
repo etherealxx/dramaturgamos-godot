@@ -1,10 +1,11 @@
 extends VBoxContainer
 
+var first_two_names := ["", ""]
+
 @onready var charlist = $CharacterScroll/CharacterList
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	charlist.update_all_name_list()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func fill_first_two_names(index, chara):
+	first_two_names.insert(index, chara)
