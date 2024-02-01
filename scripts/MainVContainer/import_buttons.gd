@@ -51,12 +51,16 @@ func _on_file_chosen(path):
 					new_names.append(sentence_dict["character"])
 					
 			if !new_names.is_empty():
-				$"../CharacterScroll/CharacterList".update_all_name_list(new_names)
+				parent.update_charalist(new_names)
+				parent.charalistline_updateall()
 			
+			var last_linecont : HBoxContainer
 			for sentence_dict : Dictionary in json_cutscene_dict["Sentences"]:
-				parent.append_line_container(	sentence_dict["character"], 
-												sentence_dict["dialog"],)
-
+				last_linecont = parent.append_line_container(sentence_dict["character"], 
+															sentence_dict["dialog"],)
+			last_linecont.update_all_name_list(parent.get_charalist())
+			
+			
 			#for value in json_dict.values():
 				#print(value)
 			

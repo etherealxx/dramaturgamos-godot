@@ -144,7 +144,7 @@ text = "Character List"
 [node name="CharacterLine" parent="ScrollContainer/MainVContainer/CharacterScroll/CharacterList" instance=ExtResource("5_ubqmt")]
 layout_mode = 2
 
-[node name="NewCharacterText" type="TextEdit" parent="ScrollContainer/MainVContainer/CharacterScroll/CharacterList"]
+[node name="NewCharacterText" type="LineEdit" parent="ScrollContainer/MainVContainer/CharacterScroll/CharacterList"]
 visible = false
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2

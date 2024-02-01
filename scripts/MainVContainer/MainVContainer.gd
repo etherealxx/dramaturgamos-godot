@@ -1,11 +1,30 @@
 extends VBoxContainer
 
 var first_two_names := ["", ""]
+var character_list : Array[String] = []
 
-@onready var charlist = $CharacterScroll/CharacterList
+@onready var charlist_line = $CharacterScroll/CharacterList
 
 func _ready():
-	charlist.update_all_name_list()
+	charlist_line.update_all_name_list()
+
+func charalistline_updateall():
+	charlist_line.check_new_names_from_parent()
+
+func update_charalist(list):
+	var templist_noduplicates : Array[String] = []
+	var templist : Array[String] = character_list
+	templist.append_array(list)
+	
+	for charaname in templist:
+		if not templist_noduplicates.has(charaname):
+			templist_noduplicates.append(charaname)
+	
+	character_list = templist_noduplicates
+	
+
+func get_charalist():
+	return character_list
 
 func fill_first_two_names(index, chara):
 	first_two_names.insert(index, chara)
@@ -36,10 +55,11 @@ func append_line_container(character, dialog):
 	#print(self.get_script())
 	#print(new_linecont.get_script())
 	new_linecont.set_script(last_linecont.get_script())
-	new_linecont.set_character_names(new_linecont.character_names)
-	new_linecont.update_character()
+	#new_linecont.set_character_names(new_linecont.character_names)
+	new_linecont.update_character(get_charalist())
 	new_linecont.set_character_by_name(character)
 	new_linecont.set_dialog(dialog)
+	return new_linecont
 	#last_linecont.check_first_two()
 	#
 	#var new_linecont_index : int = new_linecont.check_linecontainer_index(new_linecont)

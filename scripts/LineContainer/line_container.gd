@@ -13,7 +13,7 @@ signal plus_pressed
 
 var islinecontainer = true
 var isready := false
-var character_names : Array[String]
+#var character_names : Array[String]
 #func _init():
 	#plus.pressed.connect(_on_plus_pressed)
 	#xbtn.pressed.connect(_on_xbtn_pressed)
@@ -31,25 +31,55 @@ func _process(delta):
 	if !isready:
 		_ready()
 
-func set_character_names(_character_names):
-	character_names = _character_names
+#func set_character_names(_character_names):
+	#character_names = _character_names
 
 func set_dialog(text):
 	dialogtext.set_text(text)
 
-func update_character(namelist : Array[String] = character_names):
-	var option_itemlist : Array[String] = []
-	var addedname_list : Array[String] = []
-	for i in charaoption.get_item_count():
-		var chara_name = charaoption.get_item_text(i)
-		if not option_itemlist.has(chara_name):
-			option_itemlist.append(chara_name)
-	for new_name in namelist:
-		if new_name not in option_itemlist:
-			addedname_list.append(new_name)
-	for new_name in addedname_list:
-		charaoption.add_item(new_name)
-	character_names = namelist
+func update_character(new_charaname_list_notfull : Array[String] = parent.get_charalist()):
+	# this part sucks ass
+	
+	var charaname_list_noduplicates : Array[String] = []
+	var charaname_list_thatwillbeadded : Array[String] = []
+	var charaname_list_thatwillbeadded_noduplicates : Array[String] = []
+	
+	for i in charaoption.get_item_count(): # charaoption is dropdown
+		var charaname_on_index = charaoption.get_item_text(i)
+		if not charaname_list_noduplicates.has(charaname_on_index):
+			charaname_list_noduplicates.append(charaname_on_index)
+
+	#print(str(charaname_list_noduplicates))
+	
+	#for charaname_candidate in new_charaname_list_notfull:
+		#if not charaname_list_noduplicates.has(charaname_candidate):
+			#charaname_list_thatwillbeadded.append(charaname_candidate)
+
+	for charaname_candidate in new_charaname_list_notfull:
+		if not charaname_list_noduplicates.has(charaname_candidate):
+			charaname_list_thatwillbeadded.append(charaname_candidate)
+
+	for charaname_candidate in charaname_list_thatwillbeadded:
+		if not charaname_list_thatwillbeadded_noduplicates.has(charaname_candidate):
+			charaname_list_thatwillbeadded_noduplicates.append(charaname_candidate)
+	
+	print(str(charaname_list_thatwillbeadded_noduplicates))
+	for charaname_willbeaddednow in charaname_list_thatwillbeadded_noduplicates:
+		charaoption.add_item(charaname_willbeaddednow)
+	
+	parent.update_charalist(charaname_list_thatwillbeadded_noduplicates)
+	#var option_itemlist : Array[String] = []
+	#var addedname_list : Array[String] = []
+	#for i in charaoption.get_item_count():
+		#var chara_name = charaoption.get_item_text(i)
+		#if not option_itemlist.has(chara_name):
+			#option_itemlist.append(chara_name)
+	#for new_name in namelist:
+		#if new_name not in option_itemlist:
+			#addedname_list.append(new_name)
+	#for new_name in addedname_list:
+		#charaoption.add_item(new_name)
+	#character_names = namelist
 	
 func check_index():
 	for iternumber : int in parent.get_child_count():
@@ -88,14 +118,16 @@ func set_character_by_name(chara_name : String):
 		if charaoption.get_item_text(chara_index) == chara_name:
 			charaoption.selected = chara_index
 			break
-	charaoption.add_item(chara_name)
-	update_character()
+	parent.update_charalist([chara_name])
+	parent.charalistline_updateall()
+	update_character(parent.get_charalist())
+	
 	#charaoption.set_item_text(chara)
 	
 func get_dialog():
 	return dialogtext.get_text()
 
-func update_all_name_list(namelist = character_names):
+func update_all_name_list(namelist = parent.get_charalist()):
 	for iternumber : int in parent.get_child_count():
 		var child = parent.get_child(iternumber)
 		if "islinecontainer" in child:
@@ -119,7 +151,7 @@ func _on_plus_pressed():
 	#print(self.get_script())
 	#print(new_linecont.get_script())
 	new_linecont.set_script(self.get_script())
-	new_linecont.set_character_names(character_names)
+	#new_linecont.set_character_names(character_names)
 	new_linecont.update_character()
 	check_first_two()
 	
