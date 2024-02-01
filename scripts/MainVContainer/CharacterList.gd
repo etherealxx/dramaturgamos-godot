@@ -21,11 +21,11 @@ func check_available_name():
 			name_array.append(child.get_text())
 	return name_array
 
-func update_all_name_list():
+func update_all_name_list(namelist : Array[String] = check_available_name()):
 	for iternumber : int in parent.get_child_count():
 		var child = parent.get_child(iternumber)
 		if "islinecontainer" in parent.get_child(iternumber):
-			child.update_character(check_available_name())
+			child.update_character(namelist)
 
 func _on_ok_button_pressed():
 	var new_chara_name = textbox.get_text()

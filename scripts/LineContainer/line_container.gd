@@ -33,7 +33,10 @@ func _process(delta):
 
 func set_character_names(_character_names):
 	character_names = _character_names
-	
+
+func set_dialog(text):
+	dialogtext.set_text(text)
+
 func update_character(namelist : Array[String] = character_names):
 	var option_itemlist : Array[String]
 	var addedname_list : Array[String]
@@ -73,7 +76,9 @@ func get_linecontainer_at_index(index : int):
 	return null
 			
 func get_character():
-	return charaoption.get_item_text(charaoption.get_selected())
+	var chara_name = charaoption.get_item_text(charaoption.get_selected())
+	if chara_name:
+		return chara_name
 
 func set_character_by_name(chara_name : String):
 	var select_index = 0
@@ -83,6 +88,8 @@ func set_character_by_name(chara_name : String):
 				if charaoption.get_item_text(chara_index) == chara_name:
 					charaoption.selected = chara_index
 					break
+	charaoption.add_item(chara_name)
+	update_character()
 	#charaoption.set_item_text(chara)
 	
 func get_dialog():

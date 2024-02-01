@@ -19,8 +19,11 @@ func check_filled_title(filter : PackedStringArray, extension : String):
 	if savetitle:
 		print(parent.get_node("TitleLine").get_title())
 		filedialog.set_filters(filter)
-		filedialog.show()
+		filedialog.set_file_mode(4) # save
+		filedialog.set_ok_button_text("Save")
 		filedialog.set_current_file("%s.%s" % [savetitle, extension])
+		filedialog.show()
+
 	else:
 		alert.show()
 
@@ -79,7 +82,7 @@ func _on_file_chosen(path):
 			printx("Formatted text exported successfully\nLocated in %s" % path)
 		else:
 			printx("Error opening the file for writing")
-			
+		waitfor = String()
 func _on_export_textbtn_pressed():
 	waitfor = "txtexport"
 	var filter = PackedStringArray(["*.txt ; Text Files"])
